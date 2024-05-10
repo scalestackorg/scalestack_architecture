@@ -6,6 +6,7 @@ from aws_cdk import (
     DockerImage,
     Duration,
     aws_iam,
+    CfnOutput,
 )
 from aws_cdk import aws_lambda as lambda_
 from logging import getLogger
@@ -106,13 +107,13 @@ class PythonLambdaFactory(BaseFactory):
         :param policies: A list of IAM policies to attach to the function
         :param use_default_policy: Whether to attach the default policy to the function, this policie allows to get values from secret manager and send message to sqs (default True)
         """
-        name = self.name(name)
+
         if use_default_policy:
             policies.append(self.default_policy)
         func = lambda_.Function(
             self.stack,
-            name,
-            function_name=name,
+            self.name(name),
+            function_name=self.name(name),
             runtime=lambda_.Runtime.PYTHON_3_11,
             handler=f"{index}.{handler}",
             code=lambda_.Code.from_asset(folder, bundling=self.bundle(folder)),
@@ -121,6 +122,11 @@ class PythonLambdaFactory(BaseFactory):
             memory_size=memory_size,
             layers=layers,
             initial_policy=policies,
+        )
+        CfnOutput(
+            self.stack,
+            f"{name} deployed to:",
+            value=func.function_name,
         )
         return func
 
