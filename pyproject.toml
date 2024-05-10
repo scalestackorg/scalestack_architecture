@@ -21,3 +21,8 @@ commitizen = "^3.25.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.commitizen]
+update_changelog_on_bump = true
+version_files = ["pyproject.toml"]
+version = "0.1.0"
