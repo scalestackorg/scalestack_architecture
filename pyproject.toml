@@ -4,6 +4,10 @@ version = "0.2.1"
 description = "A package to manage the helpers to define scalestack architecture"
 authors = ["Carlos Albornoz <calbornoz@scalestack.ai>"]
 readme = "README.md"
+packages = [
+    { include = "scalestack_architecture", from = "." },
+    { include = "scalestack_architecture.*", from = "." },
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
