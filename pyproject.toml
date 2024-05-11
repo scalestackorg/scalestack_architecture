@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "scalestack-architecture"
+name = "scalestack_architecture"
 version = "0.2.0"
 description = "A package to manage the helpers to define scalestack architecture"
 authors = ["Carlos Albornoz <calbornoz@scalestack.ai>"]
