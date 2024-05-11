@@ -26,7 +26,9 @@ class ApiGatewayFactory(BaseFactory):
     def new_rest_lambda_integration(
         api: apigw.RestApi, lambda_function: Function, path: str, method: str = "GET"
     ):
-        return api.root.add_resource(path).add_method(
+        if path:
+            api = api.root.add_resource(path)
+        return api.add_method(
             method,
             apigw.LambdaIntegration(lambda_function),
         )
