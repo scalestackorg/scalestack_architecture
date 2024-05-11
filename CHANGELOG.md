@@ -1,3 +1,9 @@
+## 0.2.13 (2024-05-11)
+
+### Fix
+
+- **apigw**: the path can be empty now for sure
+
 ## 0.2.12 (2024-05-11)
 
 ### Fix
