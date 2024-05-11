@@ -57,7 +57,7 @@ class PythonLambdaBundler:
 
 
 class PythonLambdaFactory(BaseFactory):
-    def __init__(self, stack: Stack, stage: str, prefix: str, env: dict = {}):
+    def __init__(self, stack: Stack, stage: str, prefix: str = "", env: dict = {}):
         super().__init__(stack, stage, prefix)
         self.env = {"STAGE": stage, **env}
         self.build_image = DockerImage.from_registry(

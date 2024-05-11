@@ -5,7 +5,7 @@ from .base import BaseFactory
 
 
 class ApiGatewayFactory(BaseFactory):
-    def __init__(self, stack: Stack, stage: str, prefix: str):
+    def __init__(self, stack: Stack, stage: str, prefix: str = ""):
         super().__init__(stack, stage, prefix)
 
     def new_rest_api(self, api_name: str):
