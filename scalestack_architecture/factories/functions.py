@@ -65,6 +65,7 @@ class PythonLambdaFactory(BaseFactory):
         )
         self.default_policy = aws_iam.PolicyStatement(
             actions=["secretsmanager:GetSecretValue", "sqs:SendMessage"],
+            resources=["*"],
         )
 
     def bundle(self, path: str) -> BundlingOptions:
