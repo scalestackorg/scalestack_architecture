@@ -1,7 +1,7 @@
 from aws_cdk import aws_apigateway as apigw
 from aws_cdk import CfnOutput, Stack
 from aws_cdk.aws_lambda import Function
-from factories.base import BaseFactory
+from .base import BaseFactory
 
 
 class ApiGatewayFactory(BaseFactory):

@@ -13,7 +13,7 @@ from logging import getLogger
 import sys
 import os
 import subprocess
-from factories.base import BaseFactory
+from .base import BaseFactory
 
 
 @implements(ILocalBundling)
