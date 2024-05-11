@@ -27,8 +27,10 @@ class ApiGatewayFactory(BaseFactory):
         api: apigw.RestApi, lambda_function: Function, path: str, method: str = "GET"
     ):
         if path:
-            api = api.root.add_resource(path)
-        return api.add_method(
+            resource = api.root.add_resource(path)
+        else:
+            resource = api.root
+        return resource.add_method(
             method,
             apigw.LambdaIntegration(lambda_function),
         )
