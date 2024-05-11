@@ -1,3 +1,9 @@
+## 0.2.12 (2024-05-11)
+
+### Fix
+
+- **lambda**: default policy now has a resource
+
 ## 0.2.11 (2024-05-11)
 
 ### Fix
