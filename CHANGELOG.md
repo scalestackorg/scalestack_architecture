@@ -1,3 +1,13 @@
+## 0.2.0 (2024-05-11)
+
+### Feat
+
+- added apigateway factory
+
+### Fix
+
+- added output for when functions are created
+
 ## 0.1.0 (2024-05-10)
 
 ### Feat
