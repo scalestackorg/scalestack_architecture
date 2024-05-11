@@ -1,3 +1,9 @@
+## 0.2.6 (2024-05-11)
+
+### Fix
+
+- rename to folder containing package
+
 ## 0.2.5 (2024-05-11)
 
 ### Fix
