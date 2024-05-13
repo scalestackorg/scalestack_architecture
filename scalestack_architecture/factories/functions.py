@@ -64,7 +64,14 @@ class PythonLambdaFactory(BaseFactory):
             "public.ecr.aws/sam/build-python3.11:latest-x86_64"
         )
         self.default_policy = aws_iam.PolicyStatement(
-            actions=["secretsmanager:GetSecretValue", "sqs:SendMessage"],
+            actions=[
+                "secretsmanager:GetSecretValue",
+                "sqs:SendMessage",
+                "dynamodb:PutItem",
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:UpdateItem",
+            ],
             resources=["*"],
         )
 
