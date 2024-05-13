@@ -1,3 +1,9 @@
+## 0.2.14 (2024-05-13)
+
+### Fix
+
+- added dynamo to default policies
+
 ## 0.2.13 (2024-05-11)
 
 ### Fix
