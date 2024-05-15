@@ -42,6 +42,8 @@ class PythonLambdaBundler:
         self.logger.info(f"Bundle {self.path} to {output_dir}")
         try:
             requirements = f"{self.path}/requirements.txt"
+            if layer_path:
+                os.makedirs(layer_path, exist_ok=True)
             requirements_cmd = (
                 f"pip install -r {requirements} -t {output_dir}/{layer_path}"
             )
@@ -91,6 +93,7 @@ class PythonLambdaFactory(BaseFactory):
             command=[
                 "bash",
                 "-c",
+                f"if [ ! -d {out_folder} ]; then mkdir -p {out_folder}; fi && ",
                 f"if [ -f requirements.txt ]; then pip install -r requirements.txt -t {out_folder}; fi && cp -au . {out_folder}",
             ],
         )
