@@ -93,8 +93,7 @@ class PythonLambdaFactory(BaseFactory):
             command=[
                 "bash",
                 "-c",
-                f"if [ ! -d {out_folder} ]; then mkdir -p {out_folder}; fi && ",
-                f"if [ -f requirements.txt ]; then pip install -r requirements.txt -t {out_folder}; fi && cp -au . {out_folder}",
+                f"if [ ! -d {out_folder} ]; then mkdir -p {out_folder}; fi && if [ -f requirements.txt ]; then pip install -r requirements.txt -t {out_folder}; fi && cp -au . {out_folder}",
             ],
         )
 
