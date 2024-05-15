@@ -1,3 +1,9 @@
+## 0.3.0 (2024-05-15)
+
+### Feat
+
+- layer now is build to site-packages
+
 ## 0.2.14 (2024-05-13)
 
 ### Fix
