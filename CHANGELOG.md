@@ -1,3 +1,9 @@
+## 0.3.5 (2024-05-15)
+
+### Fix
+
+- make folder if it doesn't exists again
+
 ## 0.3.4 (2024-05-15)
 
 ### Fix
