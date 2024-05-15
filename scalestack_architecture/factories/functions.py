@@ -75,17 +75,23 @@ class PythonLambdaFactory(BaseFactory):
             resources=["*"],
         )
 
-    def bundle(self, path: str) -> BundlingOptions:
+    def bundle(self, path: str, layer=False) -> BundlingOptions:
         """
         Bundle a Lambda function, using a Docker image if necessary
         """
+        if layer:
+            layer_path = f"python/lib/python3.{sys.version_info.minor}/site-packages"
+            out_folder = f"/asset-output/{layer_path}"
+        else:
+            out_folder = "/asset-output"
+
         return BundlingOptions(
             image=self.build_image,
-            local=PythonLambdaBundler(path),
+            local=PythonLambdaBundler(path, layer),
             command=[
                 "bash",
                 "-c",
-                "if [ -f requirements.txt ]; then pip install -r requirements.txt -t /asset-output; fi && cp -au . /asset-output",
+                f"if [ -f requirements.txt ]; then pip install -r requirements.txt -t {out_folder}; fi && cp -au . {out_folder}",
             ],
         )
 
@@ -149,7 +155,9 @@ class PythonLambdaFactory(BaseFactory):
             self.stack,
             name,
             layer_version_name=name,
-            code=lambda_.Code.from_asset(folder, bundling=self.bundle(folder)),
+            code=lambda_.Code.from_asset(
+                folder, bundling=self.bundle(folder, layer=True)
+            ),
             compatible_runtimes=[lambda_.Runtime.PYTHON_3_11],
         )
         return layer
