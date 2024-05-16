@@ -142,11 +142,12 @@ class PythonLambdaFactory(BaseFactory):
             initial_policy=policies,
         )
         self.created_functions[name] = func
-        print(f"Created function: {self.name(name)}")
+        # print(f"Created function: {self.name(name)}")
         CfnOutput(
             self.stack,
             f"{name} deployed to:",
             value=func.function_name,
+            description=f"{name} deployed to",
         )
         return func
 
