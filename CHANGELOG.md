@@ -1,3 +1,9 @@
+## 0.3.6 (2024-05-16)
+
+### Fix
+
+- the name formater now uses underscores
+
 ## 0.3.5 (2024-05-15)
 
 ### Fix
