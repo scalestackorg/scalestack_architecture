@@ -76,6 +76,8 @@ class PythonLambdaFactory(BaseFactory):
             ],
             resources=["*"],
         )
+        self.created_functions = {}
+        self.created_layers = {}
 
     def bundle(self, path: str, layer=False) -> BundlingOptions:
         """
@@ -139,12 +141,20 @@ class PythonLambdaFactory(BaseFactory):
             layers=layers,
             initial_policy=policies,
         )
+        self.created_functions[name] = func
         CfnOutput(
             self.stack,
             f"{name} deployed to:",
             value=func.function_name,
         )
         return func
+
+    @property
+    def functions(self):
+        """
+        A list of all created Lambda functions by this factory instance
+        """
+        return list(self.created_functions.values())
 
     def new_layer(self, name: str, folder: str):
         """
@@ -162,4 +172,5 @@ class PythonLambdaFactory(BaseFactory):
             ),
             compatible_runtimes=[lambda_.Runtime.PYTHON_3_11],
         )
+        self.created_layers[name] = layer
         return layer
