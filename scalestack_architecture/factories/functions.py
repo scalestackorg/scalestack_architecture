@@ -145,9 +145,10 @@ class PythonLambdaFactory(BaseFactory):
         # print(f"Created function: {self.name(name)}")
         CfnOutput(
             self.stack,
-            f"{name} deployed to:",
+            f"{self.name(name)}Output",
             value=func.function_name,
             description=f"{name} deployed to",
+            export_name=f"{self.stage}_{name}_function_name",
         )
         return func
 
