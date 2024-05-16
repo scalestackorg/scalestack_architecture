@@ -1,3 +1,9 @@
+## 0.3.9 (2024-05-16)
+
+### Fix
+
+- print function name on creation
+
 ## 0.3.8 (2024-05-16)
 
 ### Fix
