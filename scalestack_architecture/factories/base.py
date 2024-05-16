@@ -6,5 +6,5 @@ class BaseFactory:
 
     def name(self, name: str):
         if self.prefix:
-            return f"{self.prefix}-{name}-{self.stage}"
-        return f"{name}-{self.stage}"
+            return f"{self.prefix}_{self.stage}_{name}"
+        return f"{self.stage}_{name}"
