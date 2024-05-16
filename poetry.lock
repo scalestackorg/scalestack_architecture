@@ -83,13 +83,13 @@ typeguard = ">=2.13.3,<2.14.0"
 
 [[package]]
 name = "aws-cdk-lib"
-version = "2.141.0"
+version = "2.142.0"
 description = "Version 2 of the AWS Cloud Development Kit library"
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "aws-cdk-lib-2.141.0.tar.gz", hash = "sha256:ed3b803a140437509f15fb9b1f8fdd6dad610da9a09e81ce147deade44d2b3e6"},
-    {file = "aws_cdk_lib-2.141.0-py3-none-any.whl", hash = "sha256:3de40f107f45feb240a751ad7c259fae7d341de1cc9c97f47059b2ff86bd62eb"},
+    {file = "aws-cdk-lib-2.142.0.tar.gz", hash = "sha256:d8e0cc3a77ecbcfa734f2fd02f9d89275946aae004ba246814f7a4f9c01665fb"},
+    {file = "aws_cdk_lib-2.142.0-py3-none-any.whl", hash = "sha256:7a98a41e66dd7aa124d765603bf933eb41d703dd88ac3d6fd7806fed60d4a2fe"},
 ]
 
 [package.dependencies]
@@ -884,20 +884,20 @@ files = [
 
 [[package]]
 name = "zipp"
-version = "3.18.1"
+version = "3.18.2"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "zipp-3.18.1-py3-none-any.whl", hash = "sha256:206f5a15f2af3dbaee80769fb7dc6f249695e940acca08dfb2a4769fe61e538b"},
-    {file = "zipp-3.18.1.tar.gz", hash = "sha256:2884ed22e7d8961de1c9a05142eb69a247f120291bc0206a00a7642f09b5b715"},
+    {file = "zipp-3.18.2-py3-none-any.whl", hash = "sha256:dce197b859eb796242b0622af1b8beb0a722d52aa2f57133ead08edd5bf5374e"},
+    {file = "zipp-3.18.2.tar.gz", hash = "sha256:6278d9ddbcfb1f1089a88fde84481528b07b0e10474e09dcfe53dad4069fa059"},
 ]
 
 [package.extras]
 docs = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-lint"]
-testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-ignore-flaky", "pytest-mypy", "pytest-ruff (>=0.2.1)"]
+testing = ["big-O", "jaraco.functools", "jaraco.itertools", "jaraco.test", "more-itertools", "pytest (>=6,!=8.1.*)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-ignore-flaky", "pytest-mypy", "pytest-ruff (>=0.2.1)"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "921a958ac65d05731f5c2fe9d9ef085eede677210b35379e6a1cb7ec8732748f"
+content-hash = "44c9e2b453e4ad5680e119cc5294dd086aac09d178e41ffb80623cdbb444a2b4"
