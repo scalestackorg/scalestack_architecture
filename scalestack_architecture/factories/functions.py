@@ -1,5 +1,7 @@
+from constructs import Construct
 from jsii import implements
 from aws_cdk import (
+    CfnOutput,
     ILocalBundling,
     BundlingOptions,
     Stack,
@@ -58,8 +60,15 @@ class PythonLambdaBundler:
 
 
 class PythonLambdaFactory(BaseFactory):
-    def __init__(self, stack: Stack, stage: str, prefix: str = "", env: dict = {}):
-        super().__init__(stack, stage, prefix)
+    def __init__(
+        self,
+        stack: Stack,
+        scope: Construct,
+        stage: str,
+        prefix: str = "",
+        env: dict = {},
+    ):
+        super().__init__(stack, stage, prefix, scope)
         self.env = {"STAGE": stage, **env}
         self.build_image = DockerImage.from_registry(
             "public.ecr.aws/sam/build-python3.11:latest-x86_64"
@@ -141,6 +150,12 @@ class PythonLambdaFactory(BaseFactory):
             initial_policy=policies,
         )
         self.created_functions[name] = func
+        CfnOutput(
+            self.scope,
+            f"DeployedName-{name}",
+            value=func.function_name,
+            description=f"The Deployed Name of the {name} Lambda function",
+        )
         return func
 
     @property

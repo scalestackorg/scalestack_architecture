@@ -1,12 +1,13 @@
 from aws_cdk import aws_apigateway as apigw
 from aws_cdk import CfnOutput, Stack
 from aws_cdk.aws_lambda import Function
+from constructs import Construct
 from .base import BaseFactory
 
 
 class ApiGatewayFactory(BaseFactory):
-    def __init__(self, stack: Stack, stage: str, prefix: str = ""):
-        super().__init__(stack, stage, prefix)
+    def __init__(self, stack: Stack, scope: Construct, stage: str, prefix: str = ""):
+        super().__init__(stack, stage, prefix, scope)
 
     def new_rest_api(self, api_name: str):
         api = apigw.RestApi(
@@ -16,8 +17,8 @@ class ApiGatewayFactory(BaseFactory):
             deploy_options=apigw.StageOptions(stage_name=self.stage),
         )
         CfnOutput(
-            self.stack,
-            f"{self.name(api_name)} URL",
+            self.scope,
+            f"{self.name(api_name)}-URL",
             value=api.url,
         )
         return api
