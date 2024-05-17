@@ -1,3 +1,9 @@
+## 0.3.16 (2024-05-17)
+
+### Fix
+
+- changed so the output uses the scope
+
 ## 0.3.15 (2024-05-17)
 
 ### Fix
