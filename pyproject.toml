@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "scalestack_architecture"
-version = "0.3.13"
+version = "0.3.14"
 description = "A package to manage the helpers to define scalestack architecture"
 authors = ["Carlos Albornoz <calbornoz@scalestack.ai>"]
 readme = "README.md"
@@ -29,4 +29,4 @@ bump_message = "chore(release): $new_version"
 version_files = ["pyproject.toml"]
 annotated_tag = false
 major_version_zero = true
-version = "0.3.13"
+version = "0.3.14"
