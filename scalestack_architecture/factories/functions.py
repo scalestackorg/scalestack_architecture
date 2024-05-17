@@ -148,7 +148,7 @@ class PythonLambdaFactory(BaseFactory):
             f"{self.name(name)}Output",
             value=func.function_name,
             description=f"{name} deployed to",
-            export_name=f"{self.stage}_{name}_function_name",
+            export_name=f"{self.stage}-{name.replace("_","-")}-function-name",
         )
         return func
 
