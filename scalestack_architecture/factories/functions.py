@@ -6,7 +6,6 @@ from aws_cdk import (
     DockerImage,
     Duration,
     aws_iam,
-    CfnOutput,
 )
 from aws_cdk import aws_lambda as lambda_
 from logging import getLogger
@@ -142,15 +141,6 @@ class PythonLambdaFactory(BaseFactory):
             initial_policy=policies,
         )
         self.created_functions[name] = func
-        # print(f"Created function: {self.name(name)}")
-        exp_name = name.replace("_", "-")
-        CfnOutput(
-            self.stack,
-            f"{self.name(name)}Output",
-            value=func.function_name,
-            description=f"{name} deployed to",
-            export_name=f"{self.stage}-{exp_name}-function-name",
-        )
         return func
 
     @property
