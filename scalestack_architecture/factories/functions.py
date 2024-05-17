@@ -143,12 +143,13 @@ class PythonLambdaFactory(BaseFactory):
         )
         self.created_functions[name] = func
         # print(f"Created function: {self.name(name)}")
+        exp_name = name.replace("_", "-")
         CfnOutput(
             self.stack,
             f"{self.name(name)}Output",
             value=func.function_name,
             description=f"{name} deployed to",
-            export_name=f"{self.stage}-{name.replace("_","-")}-function-name",
+            export_name=f"{self.stage}-{exp_name}-function-name",
         )
         return func
 
