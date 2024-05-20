@@ -1,3 +1,9 @@
+## 0.3.17 (2024-05-20)
+
+### Fix
+
+- changed the name of the env variable
+
 ## 0.3.16 (2024-05-17)
 
 ### Fix
