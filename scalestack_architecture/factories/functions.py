@@ -116,7 +116,7 @@ class PythonLambdaFactory(BaseFactory):
         timeout: int = 900,
         memory_size: int = 256,
         layers: list = [],
-        environment: dict = {},
+        env_vars: dict = {},
         policies: list = [],
         use_default_policy: bool = True,
     ):
@@ -129,7 +129,7 @@ class PythonLambdaFactory(BaseFactory):
         :param timeout: The function timeout in seconds (default 900)
         :param memory_size: The function memory size in MB (default 256)
         :param layers: A list of Lambda layers to attach to the function
-        :param environment: A dictionary of environment variables
+        :param env_vars: A dictionary of environment variables
         :param policies: A list of IAM policies to attach to the function
         :param use_default_policy: Whether to attach the default policy to the function, this policie allows to get values from secret manager and send message to sqs (default True)
         """
@@ -143,7 +143,7 @@ class PythonLambdaFactory(BaseFactory):
             runtime=lambda_.Runtime.PYTHON_3_11,
             handler=f"{index}.{handler}",
             code=lambda_.Code.from_asset(folder, bundling=self.bundle(folder)),
-            environment={**self.env, **environment},
+            environment={**self.env, **env_vars},
             timeout=Duration.seconds(timeout),
             memory_size=memory_size,
             layers=layers,
