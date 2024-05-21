@@ -1,5 +1,6 @@
 from aws_cdk import aws_apigateway as apigw
-from aws_cdk import CfnOutput, Stack
+
+from aws_cdk import CfnOutput, Stack, aws_sqs, aws_iam
 from aws_cdk.aws_lambda import Function
 from constructs import Construct
 from .base import BaseFactory
@@ -34,4 +35,45 @@ class ApiGatewayFactory(BaseFactory):
         return resource.add_method(
             method,
             apigw.LambdaIntegration(lambda_function),
+        )
+
+    def new_sqs_integration(
+        self,
+        endpoint: str,
+        sqs: aws_sqs.Queue,
+        api: apigw.RestApi,
+        method: str = "POST",
+    ):
+        role = aws_iam.Role(
+            self.stack,
+            self.name("APIGatewayRole"),
+            assumed_by=aws_iam.ServicePrincipal("apigateway.amazonaws.com"),
+            role_name=self.name("APIGatewayRole"),
+        )
+        sqs.grant_send_messages(role)
+        integration = apigw.AwsIntegration(
+            service="sqs",
+            path=sqs.queue_name,
+            options=apigw.IntegrationOptions(
+                integration_responses=[{"statusCode": "200"}],
+                credentials_role=role,
+                request_parameters={
+                    "integration.request.header.Content-Type": "'application/x-www-form-urlencoded'"
+                },
+                request_templates={
+                    "application/json": 'Action=SendMessage&MessageBody={"data":$input.body}'
+                },
+                passthrough_behavior=apigw.PassthroughBehavior.WHEN_NO_MATCH,
+            ),
+        )
+        api.root.add_resource(path_part=endpoint).add_method(
+            method,
+            integration,
+            method_responses=[{"statusCode": "200"}],
+            authorization_type=apigw.AuthorizationType.NONE,
+        )
+        CfnOutput(
+            self.scope,
+            "ApiEndpointSQS",
+            value=f"{method}: {api.rest_api_id}.execute-api.{self.stack.region}.amazonaws.com/{self.stage}/{endpoint}",
         )
