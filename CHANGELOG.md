@@ -1,3 +1,9 @@
+## 0.4.0 (2024-05-21)
+
+### Feat
+
+- added sqs integration to the apigw factory
+
 ## 0.3.17 (2024-05-20)
 
 ### Fix
