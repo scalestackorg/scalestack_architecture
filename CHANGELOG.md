@@ -1,3 +1,9 @@
+## 0.4.2 (2024-05-21)
+
+### Fix
+
+- make scope optional for apigw
+
 ## 0.4.1 (2024-05-21)
 
 ### Fix
