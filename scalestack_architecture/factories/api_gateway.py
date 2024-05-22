@@ -18,6 +18,7 @@ class ApiGatewayFactory(BaseFactory):
             self.name(api_name),
             rest_api_name=self.name(api_name),
             deploy_options=apigw.StageOptions(stage_name=self.stage),
+            cloud_watch_role=True,
         )
         CfnOutput(
             self.scope,
