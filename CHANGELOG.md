@@ -1,3 +1,9 @@
+## 0.4.3 (2024-05-22)
+
+### Fix
+
+- added cloudwatch role to apigw
+
 ## 0.4.2 (2024-05-21)
 
 ### Fix
