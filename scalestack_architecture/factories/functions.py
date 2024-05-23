@@ -149,7 +149,7 @@ class PythonLambdaFactory(BaseFactory):
             memory_size=memory_size,
             layers=layers,
             initial_policy=policies,
-            reserved_concurrent_executions=50,  # Limit the number of concurrent executions
+            reserved_concurrent_executions=10,  # Limit the number of concurrent executions
             retry_attempts=2,
         )
         self.created_functions[name] = func
