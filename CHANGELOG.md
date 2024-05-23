@@ -1,3 +1,9 @@
+## 0.4.8 (2024-05-23)
+
+### Fix
+
+- remove reserved concurrent
+
 ## 0.4.7 (2024-05-23)
 
 ### Fix
