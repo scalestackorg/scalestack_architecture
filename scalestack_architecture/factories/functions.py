@@ -114,7 +114,7 @@ class PythonLambdaFactory(BaseFactory):
         index: str,
         handler: str,
         timeout: int = 900,
-        memory_size: int = 256,
+        memory_size: int = 512,
         layers: list = [],
         env_vars: dict = {},
         policies: list = [],
@@ -127,7 +127,7 @@ class PythonLambdaFactory(BaseFactory):
         :param index: The name of the file containing the Lambda handler
         :param handler: The name of the Lambda handler function
         :param timeout: The function timeout in seconds (default 900)
-        :param memory_size: The function memory size in MB (default 256)
+        :param memory_size: The function memory size in MB (default 512)
         :param layers: A list of Lambda layers to attach to the function
         :param env_vars: A dictionary of environment variables
         :param policies: A list of IAM policies to attach to the function
@@ -149,7 +149,6 @@ class PythonLambdaFactory(BaseFactory):
             memory_size=memory_size,
             layers=layers,
             initial_policy=policies,
-            retry_attempts=2,
         )
         self.created_functions[name] = func
         CfnOutput(
