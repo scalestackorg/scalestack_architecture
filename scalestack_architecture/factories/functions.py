@@ -149,20 +149,10 @@ class PythonLambdaFactory(BaseFactory):
             memory_size=memory_size,
             layers=layers,
             initial_policy=policies,
+            reserved_concurrent_executions=50,  # Limit the number of concurrent executions
+            retry_attempts=5,
         )
         self.created_functions[name] = func
-        alias = lambda_.Alias(
-            self.stack,
-            self.name(name),
-            alias_name=self.name(name),
-            version=func.current_version,
-        )
-        scale = alias.add_auto_scaling(max_capacity=10)
-        scale.scale_on_utilization(
-            utilization_target=0.5,
-            scale_in_cooldown=Duration.seconds(60),
-            scale_out_cooldown=Duration.seconds(60),
-        )
         CfnOutput(
             self.scope,
             f"DeployedName-{name}",
