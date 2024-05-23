@@ -150,7 +150,7 @@ class PythonLambdaFactory(BaseFactory):
             layers=layers,
             initial_policy=policies,
             reserved_concurrent_executions=50,  # Limit the number of concurrent executions
-            retry_attempts=5,
+            retry_attempts=2,
         )
         self.created_functions[name] = func
         CfnOutput(
