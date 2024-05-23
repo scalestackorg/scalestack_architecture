@@ -1,3 +1,9 @@
+## 0.4.7 (2024-05-23)
+
+### Fix
+
+- decrease the reserved concurrency
+
 ## 0.4.6 (2024-05-23)
 
 ### Fix
