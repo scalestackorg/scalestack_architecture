@@ -136,6 +136,7 @@ class PythonLambdaFactory(BaseFactory):
 
         if use_default_policy:
             policies.append(self.default_policy)
+
         func = lambda_.Function(
             self.stack,
             self.name(name),
@@ -150,6 +151,18 @@ class PythonLambdaFactory(BaseFactory):
             initial_policy=policies,
         )
         self.created_functions[name] = func
+        alias = lambda_.Alias(
+            self.stack,
+            self.name(name),
+            alias_name=self.name(name),
+            version=func.current_version,
+        )
+        scale = alias.add_auto_scaling(max_capacity=10)
+        scale.scale_on_utilization(
+            utilization_target=0.5,
+            scale_in_cooldown=Duration.seconds(60),
+            scale_out_cooldown=Duration.seconds(60),
+        )
         CfnOutput(
             self.scope,
             f"DeployedName-{name}",
