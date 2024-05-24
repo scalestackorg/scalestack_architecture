@@ -1,3 +1,9 @@
+## 0.4.11 (2024-05-23)
+
+### Fix
+
+- changed logging to json fix
+
 ## 0.4.10 (2024-05-23)
 
 ### Fix
