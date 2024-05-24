@@ -59,9 +59,9 @@ class DatadogFactory:
             log_level=self.dd_log_level,
             service=self.service,
             capture_lambda_payload=True,
+            inject_log_context=True,
             flush_metrics_to_logs=True,
             enable_profiling=True,
             enable_merge_xray_traces=True,
             enable_cold_start_tracing=True,
-            decode_authorizer_context=True,
         )
