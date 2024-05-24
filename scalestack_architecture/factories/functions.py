@@ -149,6 +149,7 @@ class PythonLambdaFactory(BaseFactory):
             memory_size=memory_size,
             layers=layers,
             initial_policy=policies,
+            logging_format=lambda_.LogFormat.JSON,
         )
         self.created_functions[name] = func
         CfnOutput(
