@@ -1,3 +1,9 @@
+## 0.4.13 (2024-05-27)
+
+### Fix
+
+- added dlq and logging for factory
+
 ## 0.4.12 (2024-05-23)
 
 ### Fix
