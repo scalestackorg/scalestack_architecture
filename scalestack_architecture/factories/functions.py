@@ -15,6 +15,7 @@ import sys
 import os
 import subprocess
 from .base import BaseFactory
+from datadog_cdk_constructs_v2 import Datadog
 
 
 @implements(ILocalBundling)
@@ -67,6 +68,8 @@ class PythonLambdaFactory(BaseFactory):
         stage: str,
         prefix: str = "",
         env: dict = {},
+        monitoting: Datadog = None,
+        dql=None,
     ):
         super().__init__(stack, stage, prefix, scope)
         self.env = {"STAGE": stage, **env}
@@ -86,6 +89,8 @@ class PythonLambdaFactory(BaseFactory):
         )
         self.created_functions = {}
         self.created_layers = {}
+        self.monitoring = monitoting
+        self.dlq = dql
 
     def bundle(self, path: str, layer=False) -> BundlingOptions:
         """
@@ -119,6 +124,7 @@ class PythonLambdaFactory(BaseFactory):
         env_vars: dict = {},
         policies: list = [],
         use_default_policy: bool = True,
+        dlq=None,
     ):
         """
         Create a new Lambda function
@@ -136,7 +142,7 @@ class PythonLambdaFactory(BaseFactory):
 
         if use_default_policy:
             policies.append(self.default_policy)
-
+        dlq = dlq or self.dlq
         func = lambda_.Function(
             self.stack,
             self.name(name),
@@ -150,6 +156,7 @@ class PythonLambdaFactory(BaseFactory):
             layers=layers,
             initial_policy=policies,
             logging_format=lambda_.LoggingFormat.JSON,
+            dead_letter_queue=dlq,
         )
         self.created_functions[name] = func
         CfnOutput(
@@ -185,3 +192,10 @@ class PythonLambdaFactory(BaseFactory):
         )
         self.created_layers[name] = layer
         return layer
+
+    def add_monitoring(self):
+        """
+        Add monitoring to the Lambda functions
+        """
+        if self.monitoring:
+            self.monitoring.add_lambda_functions(self.functions)
