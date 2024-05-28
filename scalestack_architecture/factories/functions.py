@@ -1,7 +1,6 @@
 from constructs import Construct
 from jsii import implements
 from aws_cdk import (
-    CfnOutput,
     ILocalBundling,
     BundlingOptions,
     Stack,
@@ -159,12 +158,6 @@ class PythonLambdaFactory(BaseFactory):
             dead_letter_queue=dlq,
         )
         self.created_functions[name] = func
-        CfnOutput(
-            self.scope,
-            f"DeployedName-{name}",
-            value=func.function_name,
-            description=f"The Deployed Name of the {name} Lambda function",
-        )
         return func
 
     @property
