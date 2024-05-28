@@ -68,7 +68,7 @@ class PythonLambdaFactory(BaseFactory):
         stage: str,
         prefix: str = "",
         env: dict = {},
-        monitoting: Datadog = None,
+        monitoring: Datadog = None,
         dql=None,
     ):
         super().__init__(stack, stage, prefix, scope)
@@ -89,7 +89,7 @@ class PythonLambdaFactory(BaseFactory):
         )
         self.created_functions = {}
         self.created_layers = {}
-        self.monitoring = monitoting
+        self.monitoring = monitoring
         self.dlq = dql
 
     def bundle(self, path: str, layer=False) -> BundlingOptions:
