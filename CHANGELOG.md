@@ -1,3 +1,9 @@
+## 0.5.0 (2024-05-28)
+
+### Feat
+
+- added sqs per lambda creation
+
 ## 0.4.17 (2024-05-28)
 
 ### Fix
