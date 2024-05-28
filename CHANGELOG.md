@@ -1,3 +1,9 @@
+## 0.4.17 (2024-05-28)
+
+### Fix
+
+- remove cfn output for functions
+
 ## 0.4.16 (2024-05-28)
 
 ### Fix
