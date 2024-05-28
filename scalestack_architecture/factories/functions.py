@@ -114,6 +114,7 @@ class PythonLambdaFactory(BaseFactory):
     def add_queue(
         self,
         func: lambda_.Function,
+        function_name: str,
         batch_size: int = 1,
         max_concurrency: int = 5,
         visibility_timeout: int = 900,
@@ -129,8 +130,8 @@ class PythonLambdaFactory(BaseFactory):
         """
         queue = aws_sqs.Queue(
             self.stack,
-            func.function_name + "-queue",
-            queue_name=func.function_name + "-queue",
+            function_name + "-queue",
+            queue_name=function_name + "-queue",
             visibility_timeout=Duration.seconds(visibility_timeout),
         )
         queue.grant_send_messages(func)
@@ -191,7 +192,7 @@ class PythonLambdaFactory(BaseFactory):
         )
         self.created_functions[name] = func
         if add_queue:
-            self.add_queue(func, **queue_details)
+            self.add_queue(func, self.name(name), **queue_details)
         return func
 
     @property
