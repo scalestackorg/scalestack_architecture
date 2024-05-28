@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "scalestack_architecture"
-version = "0.4.15"
+version = "0.4.16"
 description = "A package to manage the helpers to define scalestack architecture"
 authors = ["Carlos Albornoz <calbornoz@scalestack.ai>"]
 readme = "README.md"
@@ -15,7 +15,7 @@ datadog-cdk-constructs-v2 = "^1.13.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
-ruff = "^0.4.15"
+ruff = "^0.4.16"
 pre-commit = "^3.7.0"
 commitizen = "^3.25.0"
 
@@ -29,4 +29,4 @@ bump_message = "chore(release): $new_version"
 version_files = ["pyproject.toml"]
 annotated_tag = false
 major_version_zero = true
-version = "0.4.15"
+version = "0.4.16"
