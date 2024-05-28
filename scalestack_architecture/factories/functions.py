@@ -9,6 +9,8 @@ from aws_cdk import (
     aws_iam,
 )
 from aws_cdk import aws_lambda as lambda_
+from aws_cdk import aws_sqs
+from aws_cdk.aws_lambda_event_sources import SqsEventSource
 from logging import getLogger
 import sys
 import os
@@ -68,7 +70,6 @@ class PythonLambdaFactory(BaseFactory):
         prefix: str = "",
         env: dict = {},
         monitoring: Datadog = None,
-        dlq=None,
     ):
         super().__init__(stack, stage, prefix, scope)
         self.env = {"STAGE": stage, **env}
@@ -89,7 +90,6 @@ class PythonLambdaFactory(BaseFactory):
         self.created_functions = {}
         self.created_layers = {}
         self.monitoring = monitoring
-        self.dlq = dlq
 
     def bundle(self, path: str, layer=False) -> BundlingOptions:
         """
@@ -111,6 +111,39 @@ class PythonLambdaFactory(BaseFactory):
             ],
         )
 
+    def add_queue(
+        self,
+        func: lambda_.Function,
+        batch_size: int = 1,
+        max_concurrency: int = 5,
+        visibility_timeout: int = 900,
+        max_batching_window: int = 15,
+    ):
+        """
+        Add an SQS queue as an event source to a Lambda function
+        :param func: The Lambda function
+        :param batch_size: The number of messages to process in a batch (default 1)
+        :param max_concurrency: The maximum number of concurrent executions (default 5)
+        :param visibility_timeout: The visibility timeout of the messages in seconds (default 900)
+        :param max_batching_window: The maximum time to wait for messages to arrive in seconds (default 15)
+        """
+        queue = aws_sqs.Queue(
+            self.stack,
+            func.function_name + "-queue",
+            queue_name=func.function_name + "-queue",
+            visibility_timeout=Duration.seconds(visibility_timeout),
+        )
+        queue.grant_send_messages(func)
+        queue.grant_consume_messages(func)
+        func.add_event_source(
+            SqsEventSource(
+                queue,
+                batch_size=batch_size,
+                max_concurrency=max_concurrency,
+                max_batching_window=Duration.seconds(max_batching_window),
+            )
+        )
+
     def new_function(
         self,
         name: str,
@@ -123,7 +156,8 @@ class PythonLambdaFactory(BaseFactory):
         env_vars: dict = {},
         policies: list = [],
         use_default_policy: bool = True,
-        dlq=None,
+        add_queue: bool = False,
+        queue_details: dict = {},
     ):
         """
         Create a new Lambda function
@@ -141,7 +175,6 @@ class PythonLambdaFactory(BaseFactory):
 
         if use_default_policy:
             policies.append(self.default_policy)
-        dlq = dlq or self.dlq
         func = lambda_.Function(
             self.stack,
             self.name(name),
@@ -155,9 +188,10 @@ class PythonLambdaFactory(BaseFactory):
             layers=layers,
             initial_policy=policies,
             logging_format=lambda_.LoggingFormat.JSON,
-            dead_letter_queue=dlq,
         )
         self.created_functions[name] = func
+        if add_queue:
+            self.add_queue(func, **queue_details)
         return func
 
     @property
