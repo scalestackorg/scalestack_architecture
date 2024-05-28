@@ -1,3 +1,9 @@
+## 0.5.1 (2024-05-28)
+
+### Fix
+
+- now addqueue uses func name
+
 ## 0.5.0 (2024-05-28)
 
 ### Feat
