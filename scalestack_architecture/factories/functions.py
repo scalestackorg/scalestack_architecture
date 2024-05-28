@@ -168,6 +168,13 @@ class PythonLambdaFactory(BaseFactory):
         return func
 
     @property
+    def layers(self):
+        """
+        A list of all created Lambda layers by this factory instance
+        """
+        return list(self.created_layers.values())
+
+    @property
     def functions(self):
         """
         A list of all created Lambda functions by this factory instance
