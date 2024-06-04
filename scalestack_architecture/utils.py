@@ -4,7 +4,7 @@ from aws_cdk.aws_sqs import Queue
 
 
 def create_event_bridge_sqs_target(
-    event_bus: EventBus, queue: Queue, rule_name: str, event_pattern: dict
+    event_bus: EventBus, queue: Queue, rule_name: str, event_pattern: dict, stage: str
 ):
     """
     Create an EventBridge rule that sends events to an SQS queue
@@ -12,8 +12,10 @@ def create_event_bridge_sqs_target(
     :param queue: The SQS queue
     :param rule_name: The name of the rule
     :param event_pattern: The event pattern to match
+    :param stage: The stage of the stack (e.g. dev, prod)
     :return: Rule
     """
+    rule_name = f"{stage}_{rule_name}"
     return Rule(
         queue.stack,
         rule_name,
