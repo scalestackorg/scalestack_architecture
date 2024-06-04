@@ -200,7 +200,7 @@ class PythonLambdaFactory(BaseFactory):
         if add_queue:
             queue = self.add_queue(func, self.name(name), **queue_details)
             self.created_functions[name]["queue"] = queue
-        return func, queue
+        return {"function": func, "queue": queue}
 
     @property
     def layers(self):
