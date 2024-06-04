@@ -1,3 +1,9 @@
+## 0.5.2 (2024-06-04)
+
+### Fix
+
+- changed defaults for queues
+
 ## 0.5.1 (2024-05-28)
 
 ### Fix
