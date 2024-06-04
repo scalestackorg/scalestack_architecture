@@ -148,6 +148,7 @@ class PythonLambdaFactory(BaseFactory):
                 ),
             )
         )
+        return queue
 
     def new_function(
         self,
@@ -194,10 +195,12 @@ class PythonLambdaFactory(BaseFactory):
             initial_policy=policies,
             logging_format=lambda_.LoggingFormat.JSON,
         )
-        self.created_functions[name] = func
+        self.created_functions[name] = {"function": func, "queue": None}
+        queue = None
         if add_queue:
-            self.add_queue(func, self.name(name), **queue_details)
-        return func
+            queue = self.add_queue(func, self.name(name), **queue_details)
+            self.created_functions[name]["queue"] = queue
+        return func, queue
 
     @property
     def layers(self):
@@ -211,7 +214,7 @@ class PythonLambdaFactory(BaseFactory):
         """
         A list of all created Lambda functions by this factory instance
         """
-        return list(self.created_functions.values())
+        return [f["function"] for f in self.created_functions.values()]
 
     def new_layer(self, name: str, folder: str):
         """
