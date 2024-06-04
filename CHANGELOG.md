@@ -1,3 +1,9 @@
+## 0.6.0 (2024-06-04)
+
+### Feat
+
+- added sqs eventbridge helper target
+
 ## 0.5.4 (2024-06-04)
 
 ### Fix
