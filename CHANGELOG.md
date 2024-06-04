@@ -1,3 +1,9 @@
+## 0.6.1 (2024-06-04)
+
+### Fix
+
+- the return for functions is a queue
+
 ## 0.6.0 (2024-06-04)
 
 ### Feat
