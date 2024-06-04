@@ -141,7 +141,11 @@ class PythonLambdaFactory(BaseFactory):
                 queue,
                 batch_size=batch_size,
                 max_concurrency=max_concurrency,
-                max_batching_window=Duration.seconds(max_batching_window),
+                max_batching_window=(
+                    Duration.seconds(max_batching_window)
+                    if max_batching_window
+                    else None
+                ),
             )
         )
 
