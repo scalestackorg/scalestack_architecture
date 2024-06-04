@@ -1,3 +1,9 @@
+## 0.5.4 (2024-06-04)
+
+### Fix
+
+- now it returns the queue when created
+
 ## 0.5.3 (2024-06-04)
 
 ### Fix
