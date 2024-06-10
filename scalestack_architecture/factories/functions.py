@@ -115,10 +115,10 @@ class PythonLambdaFactory(BaseFactory):
         self,
         func: lambda_.Function,
         function_name: str,
-        batch_size: int = 10,
+        batch_size: int = 20,
         max_concurrency: int = 25,
         visibility_timeout: int = 900,
-        max_batching_window: int = 0,
+        max_batching_window: int = 3,
     ):
         """
         Add an SQS queue as an event source to a Lambda function
