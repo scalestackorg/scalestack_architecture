@@ -115,18 +115,18 @@ class PythonLambdaFactory(BaseFactory):
         self,
         func: lambda_.Function,
         function_name: str,
-        batch_size: int = 20,
-        max_concurrency: int = 25,
+        batch_size: int = 30,
+        max_concurrency: int = 30,
         visibility_timeout: int = 900,
-        max_batching_window: int = 3,
+        max_batching_window: int = 5,
     ):
         """
         Add an SQS queue as an event source to a Lambda function
         :param func: The Lambda function
-        :param batch_size: The number of messages to process in a batch (default 10)
-        :param max_concurrency: The maximum number of concurrent executions (default 25)
+        :param batch_size: The number of messages to process in a batch (default 30)
+        :param max_concurrency: The maximum number of concurrent executions (default 30)
         :param visibility_timeout: The visibility timeout of the messages in seconds (default 900)
-        :param max_batching_window: The maximum time to wait for messages to arrive in seconds (default 0)
+        :param max_batching_window: The maximum time to wait for messages to arrive in seconds (default 5)
         """
         queue = aws_sqs.Queue(
             self.stack,
@@ -146,6 +146,7 @@ class PythonLambdaFactory(BaseFactory):
                     if max_batching_window
                     else None
                 ),
+                report_batch_item_failures=True,
             )
         )
         return queue
