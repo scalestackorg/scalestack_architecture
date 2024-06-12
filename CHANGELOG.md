@@ -1,3 +1,9 @@
+## 0.7.1 (2024-06-12)
+
+### Fix
+
+- topic subscription method
+
 ## 0.7.0 (2024-06-12)
 
 ### Feat
