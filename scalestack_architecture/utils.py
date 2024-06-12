@@ -37,9 +37,9 @@ def create_sns_to_sqs_subscription(
     :param queue: The SQS queue
     :return: Subscription
     """
-    return SqsSubscription(
+    subs = SqsSubscription(
         queue,
         raw_message_delivery=True,
-        topic=topic,
         filter_policy_with_message_body=filter_policy,
     )
+    topic.add_subscription(subs)
