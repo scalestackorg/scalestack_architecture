@@ -1,3 +1,9 @@
+## 0.7.0 (2024-06-12)
+
+### Feat
+
+- added sns sqs integration
+
 ## 0.6.4 (2024-06-12)
 
 ### Fix
