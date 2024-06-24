@@ -35,7 +35,6 @@ def create_sns_to_sqs_subscription(
     Create an SNS subscription to an SQS queue
     :param topic: The SNS topic
     :param queue: The SQS queue
-    :return: Subscription
     """
     subs = SqsSubscription(
         queue,
