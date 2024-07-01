@@ -82,6 +82,7 @@ class PythonLambdaFactory(BaseFactory):
                 "dynamodb:GetItem",
                 "dynamodb:Query",
                 "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
             ],
             resources=["*"],
         )
